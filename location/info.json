@@ -1,0 +1,7 @@
+{
+    "AUTHOR" : "Nop0x",
+    "INSTALL_MSG" : "Please remember to pip3 install googlemaps pytz and pycountry, needs countrycode cog installed",
+    "NAME" : "location",
+    "SHORT" : "Spying on users with your bot",
+    "DESCRIPTION" : "Cog to show the location of a user (if he has it set)"
+}
