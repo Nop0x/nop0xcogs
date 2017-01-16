@@ -3,6 +3,6 @@
     "INSTALL_MSG" : "Please remember to pip3 install googlemaps pytz and pycountry, needs countrycode cog installed",
     "NAME" : "Location",
     "SHORT" : "Spying on users with your bot",
-    "DESCRIPTION" : "Cog to show the location of a user (if he has it set)"
+    "DESCRIPTION" : "Cog to show the location of a user (if he has it set)",
     "REQUIREMENTS" : ["pycountry", "pandas", "plotly", "csv"]
 }
