@@ -15,11 +15,6 @@ except:
     pycountry = None
     
 try:
-    import pandas as pd
-except:
-    pandas = None
-    
-try:
     import plotly.plotly as py
     import plotly
 except:
@@ -211,8 +206,6 @@ def check_files():
 def setup(bot):
     if pycountry is None:
         raise RuntimeError("You need to run pip3 install pycountry")
-    if pandas is None:
-        raise RuntimeError("You need to run pip3 install pandas")
     if plotly is None:
         raise RuntimeError("You need to run pip3 install plotly")
     check_folders()
