@@ -168,4 +168,4 @@ def setup(bot):
         raise RuntimeError("You need to run pip3 install pycountry")
     check_folders()
     check_files()
-    bot.add_cog(timezone(bot))
+    bot.add_cog(Timezone(bot))
