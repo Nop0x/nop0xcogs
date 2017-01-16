@@ -145,6 +145,9 @@ def check_files():
     if not os.path.isfile("data/countrycode/subregions.json"):
         print("Creating empty subregions.json...")
         dataIO.save_json("data/countrycode/subregions.json", {})
+    if not os.path.isfile("data/countrycode/settings.json"):
+        print("Creating empty settings.json...")
+        dataIO.save_json("data/countrycode/settings.json", {})
 
 def setup(bot):
     if pycountry is None:
