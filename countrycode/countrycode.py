@@ -151,4 +151,4 @@ def setup(bot):
         raise RuntimeError("You need to run pip3 install pycountry")
     check_folders()
     check_files()
-    bot.add_cog(countrycode(bot))
+    bot.add_cog(CountryCode(bot))
