@@ -217,4 +217,4 @@ def setup(bot):
         raise RuntimeError("You need to run pip3 install plotly")
     check_folders()
     check_files()
-    bot.add_cog(location(bot))
+    bot.add_cog(Location(bot))
