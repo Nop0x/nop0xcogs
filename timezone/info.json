@@ -3,6 +3,6 @@
     "INSTALL_MSG" : "Please remember to pip3 install googlemaps pytz and pycountry, needs countrycode cog installed",
     "NAME" : "Timezone",
     "SHORT" : "Timetravelling with your bot",
-    "DESCRIPTION" : "Cog to show the localtime of yourself or a fellow user. (or even a specific country)"
+    "DESCRIPTION" : "Cog to show the localtime of yourself or a fellow user. (or even a specific country)",
     "REQUIREMENTS" : ["pycountry", "pytz", "googlemaps"]
 }
