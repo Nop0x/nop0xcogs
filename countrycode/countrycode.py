@@ -1,15 +1,17 @@
 import discord
 import json
-import requests
 from discord.ext import commands
 from cogs.utils import checks
-import pycountry
 import re
 import os
 from .utils.dataIO import dataIO
 
+try:
+    import pycountry
+except:
+    pycountry = None
 
-class countrycode:
+class CountryCode:
     def __init__(self, bot):
         self.countries = dataIO.load_json("data/countrycode/countries.json")
         self.subregions = dataIO.load_json("data/countrycode/subregions.json")
@@ -22,7 +24,6 @@ class countrycode:
         """Example: [p]addcountry GB"""
         server = ctx.message.server
         user = ctx.message.author
-        perms = discord.Permissions.none()
 
         re1 = '((?:[a-z][a-z]+))'  # Word 1
         re2 = '.*?'  # Non-greedy match on filler
@@ -86,7 +87,6 @@ class countrycode:
 
         server = ctx.message.server
         user = ctx.message.author
-        perms = discord.Permissions.none()
 
         re1 = '((?:[a-z][a-z]+))'  # Word 1
         re2 = '.*?'  # Non-greedy match on filler
@@ -147,6 +147,8 @@ def check_files():
         dataIO.save_json("data/countrycode/subregions.json", {})
 
 def setup(bot):
+    if pycountry is None:
+        raise RuntimeError("You need to run pip3 install pycountry")
     check_folders()
     check_files()
     bot.add_cog(countrycode(bot))

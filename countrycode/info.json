@@ -1,7 +1,8 @@
 {
     "AUTHOR" : "Nop0x",
     "INSTALL_MSG" : "Please remember to pip3 install googlemaps pytz and pycountry",
-    "NAME" : "countrycode",
+    "NAME" : "CountryCode",
     "SHORT" : "Worldtravelling with your bot",
     "DESCRIPTION" : "Cog to add your country of origin"
+    "REQUIREMENTS" : ["pycountry"]
 }

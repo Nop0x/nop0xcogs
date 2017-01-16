@@ -1,7 +1,6 @@
 import discord
 import json
 from datetime import datetime, timedelta
-import requests
 from discord.ext import commands
 from cogs.utils import checks
 import re
@@ -13,7 +12,7 @@ from .utils.dataIO import dataIO
 try:
     import pycountry
 except:
-    youtube_dl = None
+    pycountry = None
     
 try:
     from pytz import country_timezones
@@ -31,7 +30,7 @@ except:
     googlemaps = None
 
 
-class timezone:
+class Timezone:
     def __init__(self, bot):
         self.bot = bot
         self.countries = dataIO.load_json("data/countrycode/countries.json")

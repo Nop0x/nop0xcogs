@@ -1,21 +1,31 @@
-import discord
 import json
-import requests
+import discord
 from discord.ext import commands
 from cogs.utils import checks
 from __main__ import send_cmd_help, settings
-import pycountry
 import re
 import os
 import datetime
-import pandas as pd
-import plotly.plotly as py
-import plotly
-from imgurpython import ImgurClient
 import csv
 from .utils.dataIO import dataIO
 
-class location:
+try:
+    import pycountry
+except:
+    pycountry = None
+    
+try:
+    import pandas as pd
+except:
+    pandas = None
+    
+try:
+    import plotly.plotly as py
+    import plotly
+except:
+    plotly = None
+
+class Location:
 
     def __init__(self, bot):
         self.countries = dataIO.load_json("data/countrycode/countries.json")
@@ -32,16 +42,7 @@ class location:
         if ctx.invoked_subcommand is None:
             server = ctx.message.server
             await send_cmd_help(ctx)
-        
-    @location_settings.command(name="imgur", pass_context=True)
-    async def _imgur(self, ctx, client_id:str, client_secret:str):
-        """Setting for imgur api."""
-        self.settings["imgur"]={}
-        self.settings["imgur"]["client_id"]= client_id
-        self.settings["imgur"]["client_secret"] = client_secret
-        dataIO.save_json("data/countrycode/settings.json", self.settings)
-        await self.bot.say("Imgur set!")
-
+            
     @location_settings.command(name="plotly", pass_context=True)
     async def _plotly(self, ctx, username:str, api_key:str):
         """Setting for plotly api."""
@@ -75,7 +76,6 @@ class location:
         
         server = ctx.message.server
         user = ctx.message.author
-        perms = discord.Permissions.none()
 
         re1 = '((?:[a-z][a-z]+))'  # Word 1
         re2 = '.*?'  # Non-greedy match on filler
@@ -135,13 +135,6 @@ class location:
         except KeyError:
             await self.bot.say("Plotly api access is not set up! Please head to <https://plot.ly/settings/api> and get your username and api key!")
             return
-        try:
-            if (self.settings["imgur"]["client_id"] is None) | (self.settings["imgur"]["client_secret"] is None):
-                await self.bot.say("Imgur api access is not set up! Please head to <http://imgur.com/account/settings/apps> and get your client_id and secret!")
-                return
-        except KeyError:
-            await self.bot.say("Imgur api access is not set up! Please head to <http://imgur.com/account/settings/apps> and get your client_id and secret!")
-            return
         
         if(datetime.datetime.now() < self.cooldown):
             await self.bot.say("The holy map of awesomness: " + self.lastlink)
@@ -193,8 +186,6 @@ class location:
         await self.bot.edit_message(msg, "Generating heatmap...")
         fig = dict( data=data, layout=layout )
         py.image.save_as(fig, filename='worldmap.png', scale=2, width=1920, height = 1080)
-        #upload = client.upload_from_path('worldmap.png')
-        #await self.bot.say("The holy map of awesomness: " + upload['link'])
         msg = await self.bot.send_file(ctx.message.channel,'worldmap.png')
         self.lastlink = msg.attachments[0]['url']
         self.cooldown = datetime.datetime.now() + datetime.timedelta(hours=1)
@@ -218,6 +209,12 @@ def check_files():
         dataIO.save_json("data/countrycode/subregions.json", {})
         
 def setup(bot):
+    if pycountry is None:
+        raise RuntimeError("You need to run pip3 install pycountry")
+    if pandas is None:
+        raise RuntimeError("You need to run pip3 install pandas")
+    if plotly is None:
+        raise RuntimeError("You need to run pip3 install plotly")
     check_folders()
     check_files()
     bot.add_cog(location(bot))
