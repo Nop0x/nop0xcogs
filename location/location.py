@@ -1,4 +1,3 @@
-import json
 import discord
 from discord.ext import commands
 from cogs.utils import checks
