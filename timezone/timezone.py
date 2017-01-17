@@ -1,5 +1,4 @@
 import discord
-import json
 from datetime import datetime, timedelta
 from discord.ext import commands
 from cogs.utils import checks
